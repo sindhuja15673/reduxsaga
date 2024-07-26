@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Provider } from 'react-redux';
+import Hello from './Hello';
+import Users from './Users';
 import './App.css';
+import getStore from './store';
+
+const store = getStore();
 
 function App() {
+  const [name, setName] = useState('React');
+  const [users, setUsers] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className='msg'>
+        <Hello name={name} />
+        <p>Start editing to see some magic happen :)</p>
+        <Users users={users}/>
+      </div>
+    </Provider>
   );
 }
 
